@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>devref.sh — Cheat Sheets, API Refs & CLI Guides</title>
+<meta name="description" content="Fast, dense, ad-free reference for CSS, JavaScript, Python, CLI commands, REST APIs and Markdown syntax.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B0E14;
+    --panel:#141922;
+    --panel-2:#10141c;
+    --hairline:#262C3A;
+    --fog:#8890A0;
+    --paper:#E8EAF0;
+    --amber:#F2A65A;
+    --violet:#9D8CFF;
+    --mint:#5FD9A4;
+    --mono:'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+    --sans:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --radius:6px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  a{color:var(--violet);}
+  ::selection{background:var(--amber); color:#0B0E14;}
+
+  /* ---------- Top chrome bar ---------- */
+  .titlebar{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:10px 18px;
+    background:var(--panel-2);
+    border-bottom:1px solid var(--hairline);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .dots{display:flex; gap:7px; flex-shrink:0;}
+  .dots span{width:11px; height:11px; border-radius:50%; display:inline-block;}
+  .dots span:nth-child(1){background:#F2A65A;}
+  .dots span:nth-child(2){background:#9D8CFF;}
+  .dots span:nth-child(3){background:#5FD9A4;}
+
+  .filename{
+    font-family:var(--mono);
+    font-weight:600;
+    font-size:14px;
+    color:var(--fog);
+    letter-spacing:0.02em;
+    white-space:nowrap;
+  }
+  .filename b{color:var(--paper); font-weight:700;}
+
+  .grepbar{
+    flex:1;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--ink);
+    border:1px solid var(--hairline);
+    border-radius:var(--radius);
+    padding:7px 12px;
+    max-width:460px;
+    margin-left:auto;
+    transition:border-color .15s ease;
+  }
+  .grepbar:focus-within{border-color:var(--amber);}
+  .grepbar .prompt{
+    font-family:var(--mono);
+    color:var(--mint);
+    font-size:13px;
+    flex-shrink:0;
+    user-select:none;
+  }
+  .grepbar input{
+    background:transparent;
+    border:none;
+    outline:none;
+    color:var(--paper);
+    font-family:var(--mono);
+    font-size:13px;
+    width:100%;
+  }
+  .grepbar input::placeholder{color:var(--fog);}
+  .grepbar .cursor{
+    width:7px; height:14px; background:var(--amber);
+    animation:blink 1.1s step-end infinite;
+    flex-shrink:0;
+  }
+  @keyframes blink{ 50%{opacity:0;} }
+
+  .result-count{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--fog);
+    white-space:nowrap;
+  }
+
+  /* ---------- Layout ---------- */
+  .shell{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    min-height:calc(100vh - 47px);
+  }
+
+  nav.tabs{
+    border-right:1px solid var(--hairline);
+    background:var(--panel-2);
+    padding:14px 0;
+    position:sticky;
+    top:47px;
+    height:calc(100vh - 47px);
+    overflow-y:auto;
+  }
+  .tabs .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--fog);
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    padding:0 18px 8px;
+  }
+  .tab-btn{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    background:transparent;
+    border:none;
+    border-left:2px solid transparent;
+    color:var(--fog);
+    font-family:var(--mono);
+    font-size:13.5px;
+    text-align:left;
+    padding:9px 18px;
+    cursor:pointer;
+    transition:background .12s ease, color .12s ease;
+  }
+  .tab-btn:hover{background:rgba(242,166,90,0.06); color:var(--paper);}
+  .tab-btn.active{
+    background:rgba(242,166,90,0.09);
+    color:var(--amber);
+    border-left-color:var(--amber);
+  }
+  .tab-btn .count{
+    font-size:11px;
+    color:var(--fog);
+    background:var(--panel);
+    border:1px solid var(--hairline);
+    border-radius:10px;
+    padding:1px 7px;
+  }
+  .tab-btn.active .count{color:var(--amber); border-color:var(--amber);}
+
+  main{padding:28px 32px 80px; max-width:900px;}
+
+  .section-head{
+    margin:0 0 4px;
+    font-family:var(--mono);
+    font-size:22px;
+    font-weight:700;
+    color:var(--paper);
+  }
+  .section-sub{
+    margin:0 0 26px;
+    color:var(--fog);
+    font-size:14.5px;
+    max-width:60ch;
+  }
+
+  /* ---------- Snippet card (terminal window) ---------- */
+  .card{
+    background:var(--panel);
+    border:1px solid var(--hairline);
+    border-radius:var(--radius);
+    margin-bottom:20px;
+    overflow:hidden;
+    scroll-margin-top:70px;
+  }
+  .card-bar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:9px 14px;
+    background:var(--panel-2);
+    border-bottom:1px solid var(--hairline);
+  }
+  .card-bar .dots span{width:8px; height:8px;}
+  .card-title{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--fog);
+    flex:1;
+  }
+  .card-title b{color:var(--paper);}
+  .tag{
+    font-family:var(--mono);
+    font-size:10.5px;
+    color:var(--violet);
+    border:1px solid var(--hairline);
+    border-radius:3px;
+    padding:1px 6px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+  .copy-btn{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--fog);
+    background:transparent;
+    border:1px solid var(--hairline);
+    border-radius:4px;
+    padding:3px 8px;
+    cursor:pointer;
+    transition:color .12s ease, border-color .12s ease;
+  }
+  .copy-btn:hover{color:var(--amber); border-color:var(--amber);}
+  .copy-btn.copied{color:var(--mint); border-color:var(--mint);}
+
+  pre{
+    margin:0;
+    padding:16px 18px;
+    overflow-x:auto;
+    font-family:var(--mono);
+    font-size:13px;
+    line-height:1.6;
+    color:#D3D8E4;
+  }
+  pre .kw{color:var(--violet);}
+  pre .str{color:var(--mint);}
+  pre .cm{color:var(--fog); font-style:italic;}
+  pre .fn{color:var(--amber);}
+
+  .desc{
+    padding:0 18px 16px;
+    font-size:13.5px;
+    color:var(--fog);
+    line-height:1.55;
+  }
+
+  /* ---------- Reference tables ---------- */
+  .ref-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13.5px;
+  }
+  .ref-table th{
+    text-align:left;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--fog);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    padding:10px 14px;
+    border-bottom:1px solid var(--hairline);
+  }
+  .ref-table td{
+    padding:11px 14px;
+    border-bottom:1px solid var(--hairline);
+    color:var(--paper);
+    vertical-align:top;
+  }
+  .ref-table tr:last-child td{border-bottom:none;}
+  .ref-table code{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--amber);
+    background:rgba(242,166,90,0.08);
+    padding:2px 6px;
+    border-radius:3px;
+    white-space:nowrap;
+  }
+  .ref-table .muted{color:var(--fog); font-size:13px;}
+
+  mark{
+    background:rgba(242,166,90,0.35);
+    color:var(--paper);
+    border-radius:2px;
+    padding:0 1px;
+  }
+
+  .hidden{display:none !important;}
+
+  .empty-state{
+    font-family:var(--mono);
+    color:var(--fog);
+    font-size:13.5px;
+    padding:40px 0;
+  }
+  .empty-state .prompt{color:var(--mint);}
+
+  footer{
+    border-top:1px solid var(--hairline);
+    padding:18px 32px;
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--fog);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  @media (max-width: 720px){
+    .shell{grid-template-columns:1fr;}
+    nav.tabs{
+      position:static;
+      height:auto;
+      display:flex;
+      overflow-x:auto;
+      padding:10px 8px;
+      border-right:none;
+      border-bottom:1px solid var(--hairline);
+    }
+    .tabs .eyebrow{display:none;}
+    .tab-btn{width:auto; white-space:nowrap; border-left:none; border-bottom:2px solid transparent;}
+    .tab-btn.active{border-left:none; border-bottom-color:var(--amber);}
+    main{padding:22px 16px 60px;}
+    .grepbar{max-width:none;}
+    .titlebar{flex-wrap:wrap; row-gap:8px;}
+  }
+
+  button:focus-visible, input:focus-visible, .tab-btn:focus-visible{
+    outline:2px solid var(--amber);
+    outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="dots"><span></span><span></span><span></span></div>
+  <div class="filename">~/<b>devref.sh</b></div>
+  <div class="grepbar">
+    <span class="prompt">grep -i</span>
+    <input type="text" id="search" placeholder="flex, useState, git rebase, 404…" autocomplete="off">
+    <span class="cursor"></span>
+  </div>
+  <div class="result-count" id="resultCount"></div>
+</div>
+
+<div class="shell">
+  <nav class="tabs" id="tabs">
+    <div class="eyebrow">// categories</div>
+    <button class="tab-btn active" data-cat="all">all <span class="count" id="count-all"></span></button>
+    <button class="tab-btn" data-cat="css">css<span class="count" id="count-css"></span></button>
+    <button class="tab-btn" data-cat="js">javascript<span class="count" id="count-js"></span></button>
+    <button class="tab-btn" data-cat="python">python<span class="count" id="count-python"></span></button>
+    <button class="tab-btn" data-cat="cli">cli / git<span class="count" id="count-cli"></span></button>
+    <button class="tab-btn" data-cat="api">api ref<span class="count" id="count-api"></span></button>
+    <button class="tab-btn" data-cat="markdown">markdown<span class="count" id="count-markdown"></span></button>
+  </nav>
+
+  <main>
+    <h1 class="section-head" id="sectionHead">All references</h1>
+    <p class="section-sub" id="sectionSub">Every snippet, table and command on this page — filter with the grep bar or a category tab. No video, no autoplay, no tracking pixels.</p>
+
+    <div id="cardStream">
+
+      <!-- CSS -->
+      <article class="card" data-cat="css" data-search="css flexbox center flex justify-content align-items">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>flexbox-center.css</b></span>
+          <span class="tag">css</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="cm">/* perfectly center any child */</span>
+.container {
+  display: <span class="str">flex</span>;
+  justify-content: <span class="str">center</span>;
+  align-items: <span class="str">center</span>;
+  min-height: <span class="str">100vh</span>;
+}</pre>
+        <p class="desc">The one-liner every developer eventually memorizes. Works on any container; swap <code>min-height</code> for a fixed height if the parent isn't full-viewport.</p>
+      </article>
+
+      <article class="card" data-cat="css" data-search="css grid template areas layout named lines">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>grid-areas.css</b></span>
+          <span class="tag">css</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre>.layout {
+  display: <span class="str">grid</span>;
+  grid-template-areas:
+    <span class="str">"header header"</span>
+    <span class="str">"sidebar content"</span>
+    <span class="str">"footer footer"</span>;
+  grid-template-columns: <span class="str">220px 1fr</span>;
+}
+.header  { grid-area: <span class="str">header</span>;  }
+.sidebar { grid-area: <span class="str">sidebar</span>; }
+.content { grid-area: <span class="str">content</span>; }
+.footer  { grid-area: <span class="str">footer</span>;  }</pre>
+        <p class="desc">Named template areas read like ASCII art of the page itself — the fastest way to reason about a layout without counting grid lines.</p>
+      </article>
+
+      <article class="card" data-cat="css" data-search="css custom properties variables root theming">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>custom-properties.css</b></span>
+          <span class="tag">css</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="cm">/* define once, reuse everywhere */</span>
+:root {
+  --brand: <span class="str">#F2A65A</span>;
+  --gap: <span class="str">1.5rem</span>;
+}
+.button {
+  background: <span class="fn">var</span>(--brand);
+  padding: <span class="fn">var</span>(--gap);
+}</pre>
+        <p class="desc">Custom properties cascade and can be overridden per-component or per-media-query, unlike Sass variables which are compiled away.</p>
+      </article>
+
+      <!-- JS -->
+      <article class="card" data-cat="js" data-search="javascript array map filter reduce methods">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>array-methods.js</b></span>
+          <span class="tag">js</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="kw">const</span> nums = [1, 2, 3, 4, 5];
+
+nums.<span class="fn">map</span>(n <span class="kw">=></span> n * 2);        <span class="cm">// [2,4,6,8,10]</span>
+nums.<span class="fn">filter</span>(n <span class="kw">=></span> n % 2 === 0); <span class="cm">// [2,4]</span>
+nums.<span class="fn">reduce</span>((a, b) <span class="kw">=></span> a + b);    <span class="cm">// 15</span></pre>
+        <p class="desc">Chain them: <code>nums.filter(n => n % 2).map(n => n * n)</code> reads left-to-right as "keep odds, then square."</p>
+      </article>
+
+      <article class="card" data-cat="js" data-search="javascript optional chaining nullish coalescing question mark">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>safe-access.js</b></span>
+          <span class="tag">js</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="cm">// optional chaining — stops instead of throwing</span>
+<span class="kw">const</span> city = user?.address?.city;
+
+<span class="cm">// nullish coalescing — fallback only for null/undefined</span>
+<span class="kw">const</span> name = user.name ?? <span class="str">'Anonymous'</span>;</pre>
+        <p class="desc">Unlike <code>||</code>, <code>??</code> won't replace <code>0</code>, <code>''</code>, or <code>false</code> — only <code>null</code>/<code>undefined</code>.</p>
+      </article>
+
+      <article class="card" data-cat="js" data-search="javascript fetch async await api request">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>fetch-async.js</b></span>
+          <span class="tag">js</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="kw">async function</span> <span class="fn">getUser</span>(id) {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">`/api/users/${id}`</span>);
+    <span class="kw">if</span> (!res.ok) <span class="kw">throw new</span> <span class="fn">Error</span>(res.status);
+    <span class="kw">return await</span> res.json();
+  } <span class="kw">catch</span> (err) {
+    console.<span class="fn">error</span>(<span class="str">'Fetch failed:'</span>, err);
+  }
+}</pre>
+        <p class="desc">Always check <code>res.ok</code> — <code>fetch</code> only rejects on network failure, not on 4xx/5xx responses.</p>
+      </article>
+
+      <!-- Python -->
+      <article class="card" data-cat="python" data-search="python list comprehension loop generator">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>comprehensions.py</b></span>
+          <span class="tag">python</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre>squares = [n**2 <span class="kw">for</span> n <span class="kw">in</span> range(10)]
+evens   = [n <span class="kw">for</span> n <span class="kw">in</span> range(20) <span class="kw">if</span> n % 2 == 0]
+pairs   = {n: n**2 <span class="kw">for</span> n <span class="kw">in</span> range(5)}   <span class="cm"># dict comprehension</span></pre>
+        <p class="desc">Readable up to one <code>for</code> and one <code>if</code>. Beyond that, a plain loop is usually clearer to the next reader.</p>
+      </article>
+
+      <article class="card" data-cat="python" data-search="python f-strings formatting string interpolation">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>f-strings.py</b></span>
+          <span class="tag">python</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre>name, score = <span class="str">"Ada"</span>, 97.436
+
+<span class="fn">print</span>(<span class="str">f"{name} scored {score:.1f}%"</span>)   <span class="cm"># Ada scored 97.4%</span>
+<span class="fn">print</span>(<span class="str">f"{name!r} → {score=}"</span>)          <span class="cm"># 'Ada' → score=97.436</span></pre>
+        <p class="desc">The <code>=</code> specifier (3.8+) prints the expression and its value together — handy for quick debugging without a separate <code>print</code>.</p>
+      </article>
+
+      <article class="card" data-cat="python" data-search="python context manager with open file">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>context-manager.py</b></span>
+          <span class="tag">python</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="kw">with</span> <span class="fn">open</span>(<span class="str">"data.txt"</span>) <span class="kw">as</span> f:
+    lines = f.readlines()
+<span class="cm"># file is closed automatically here, even on error</span></pre>
+        <p class="desc">Use <code>with</code> for anything that needs cleanup — files, locks, DB connections. It guarantees teardown even if the block raises.</p>
+      </article>
+
+      <!-- CLI / Git -->
+      <article class="card" data-cat="cli" data-search="git commands cli status add commit push pull branch merge rebase stash">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>git-essentials.sh</b></span>
+          <span class="tag">cli</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <table class="ref-table">
+          <tr><th>Command</th><th>What it does</th></tr>
+          <tr><td><code>git status</code></td><td>Show staged, unstaged and untracked changes</td></tr>
+          <tr><td><code>git add -p</code></td><td>Stage changes interactively, hunk by hunk</td></tr>
+          <tr><td><code>git commit -m "msg"</code></td><td>Commit staged changes with a message</td></tr>
+          <tr><td><code>git switch -c name</code></td><td>Create and switch to a new branch</td></tr>
+          <tr><td><code>git rebase -i HEAD~3</code></td><td>Interactively edit the last 3 commits</td></tr>
+          <tr><td><code>git stash / stash pop</code></td><td>Shelve changes, then reapply them later</td></tr>
+          <tr><td><code>git log --oneline --graph</code></td><td>Compact, visual commit history</td></tr>
+        </table>
+      </article>
+
+      <article class="card" data-cat="cli" data-search="bash one liners find grep xargs pipe terminal shell">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>bash-one-liners.sh</b></span>
+          <span class="tag">cli</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="cm"># find files modified in the last day</span>
+find . -mtime -1 -type f
+
+<span class="cm"># recursively grep for a string, show line numbers</span>
+grep -rn <span class="str">"TODO"</span> ./src
+
+<span class="cm"># kill whatever is holding port 3000</span>
+lsof -ti:3000 | xargs kill -9
+
+<span class="cm"># watch a log file live</span>
+tail -f server.log</pre>
+        <p class="desc">Four commands that account for most terminal muscle memory on any given day.</p>
+      </article>
+
+      <!-- API -->
+      <article class="card" data-cat="api" data-search="http status codes 200 301 404 500 api reference">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>http-status-codes.ref</b></span>
+          <span class="tag">api</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <table class="ref-table">
+          <tr><th>Code</th><th>Meaning</th><th>Use it when</th></tr>
+          <tr><td><code>200</code></td><td>OK</td><td class="muted">Request succeeded, body has the result</td></tr>
+          <tr><td><code>201</code></td><td>Created</td><td class="muted">A resource was created — return its location</td></tr>
+          <tr><td><code>204</code></td><td>No Content</td><td class="muted">Succeeded, nothing to send back</td></tr>
+          <tr><td><code>301 / 308</code></td><td>Moved</td><td class="muted">Permanent redirect (308 preserves method)</td></tr>
+          <tr><td><code>400</code></td><td>Bad Request</td><td class="muted">Malformed input the client can fix</td></tr>
+          <tr><td><code>401 / 403</code></td><td>Unauthorized / Forbidden</td><td class="muted">Not authenticated / not allowed</td></tr>
+          <tr><td><code>404</code></td><td>Not Found</td><td class="muted">No resource at this URI</td></tr>
+          <tr><td><code>429</code></td><td>Too Many Requests</td><td class="muted">Client is being rate-limited</td></tr>
+          <tr><td><code>500 / 503</code></td><td>Server Error / Unavailable</td><td class="muted">Something broke on the server side</td></tr>
+        </table>
+      </article>
+
+      <article class="card" data-cat="api" data-search="rest verbs get post put patch delete idempotent">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>rest-verbs.ref</b></span>
+          <span class="tag">api</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <table class="ref-table">
+          <tr><th>Verb</th><th>Purpose</th><th>Idempotent?</th></tr>
+          <tr><td><code>GET</code></td><td class="muted">Read a resource or collection</td><td class="muted">Yes</td></tr>
+          <tr><td><code>POST</code></td><td class="muted">Create a resource, or trigger an action</td><td class="muted">No</td></tr>
+          <tr><td><code>PUT</code></td><td class="muted">Replace a resource entirely</td><td class="muted">Yes</td></tr>
+          <tr><td><code>PATCH</code></td><td class="muted">Partially update a resource</td><td class="muted">No</td></tr>
+          <tr><td><code>DELETE</code></td><td class="muted">Remove a resource</td><td class="muted">Yes</td></tr>
+        </table>
+      </article>
+
+      <!-- Markdown -->
+      <article class="card" data-cat="markdown" data-search="markdown syntax headers bold italic links code table syntax">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>syntax.md</b></span>
+          <span class="tag">md</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <table class="ref-table">
+          <tr><th>Syntax</th><th>Renders as</th></tr>
+          <tr><td><code># Heading</code></td><td class="muted">Heading level 1–6 (repeat #)</td></tr>
+          <tr><td><code>**bold**</code> / <code>*italic*</code></td><td class="muted"><strong>bold</strong> / <em>italic</em></td></tr>
+          <tr><td><code>[text](url)</code></td><td class="muted">A hyperlink</td></tr>
+          <tr><td><code>![alt](url)</code></td><td class="muted">An embedded image</td></tr>
+          <tr><td><code>`inline code`</code></td><td class="muted">Monospaced inline code</td></tr>
+          <tr><td><code>```lang ... ```</code></td><td class="muted">Fenced, syntax-highlighted code block</td></tr>
+          <tr><td><code>- item</code> / <code>1. item</code></td><td class="muted">Bulleted / numbered list</td></tr>
+          <tr><td><code>&gt; quote</code></td><td class="muted">Blockquote</td></tr>
+          <tr><td><code>| a | b |</code></td><td class="muted">Table row (header separator: <code>|---|---|</code>)</td></tr>
+        </table>
+      </article>
+
+    </div>
+
+    <div class="empty-state hidden" id="emptyState">
+      <span class="prompt">$</span> grep: no matches found for your query
+    </div>
+  </main>
+</div>
+
+<footer>
+  <span>devref.sh — static, ad-free, zero telemetry</span>
+  <span id="footerCount">7 categories · 15 references</span>
+</footer>
+
+<script>
+(function(){
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const tabs = Array.from(document.querySelectorAll('.tab-btn'));
+  const search = document.getElementById('search');
+  const resultCount = document.getElementById('resultCount');
+  const emptyState = document.getElementById('emptyState');
+  const sectionHead = document.getElementById('sectionHead');
+  const sectionSub = document.getElementById('sectionSub');
+
+  const catLabels = {
+    all: ['All references', 'Every snippet, table and command on this page — filter with the grep bar or a category tab.'],
+    css: ['CSS', 'Layout and styling patterns worth keeping within arm\u2019s reach.'],
+    js: ['JavaScript', 'Core language and browser-API patterns used in most day-to-day code.'],
+    python: ['Python', 'Idiomatic patterns that show up in almost every script or service.'],
+    cli: ['CLI & Git', 'Commands typed often enough to outlive any GUI wrapper.'],
+    api: ['API reference', 'Status codes and REST verbs, the vocabulary of every HTTP API.'],
+    markdown: ['Markdown syntax', 'The full syntax table for READMEs, docs and chat formatting.']
+  };
+
+  // populate per-category counts once
+  function updateCounts(){
+    const counts = { all: cards.length };
+    cards.forEach(c => {
+      const cat = c.dataset.cat;
+      counts[cat] = (counts[cat] || 0) + 1;
+    });
+    Object.keys(counts).forEach(cat => {
+      const el = document.getElementById('count-' + cat);
+      if (el) el.textContent = counts[cat];
+    });
+  }
+  updateCounts();
+
+  let activeCat = 'all';
+
+  function stripHighlights(el){
+    el.querySelectorAll('mark').forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+  }
+
+  function highlight(el, term){
+    if(!term) return;
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    const nodes = [];
+    let n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    const re = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'ig');
+    nodes.forEach(node => {
+      if (!node.nodeValue.match(re)) return;
+      const span = document.createElement('span');
+      span.innerHTML = node.nodeValue.replace(re, '<mark>$1</mark>');
+      node.replaceWith(span);
+    });
+  }
+
+  function applyFilters(){
+    const term = search.value.trim().toLowerCase();
+    let visible = 0;
+
+    cards.forEach(card => {
+      stripHighlights(card);
+      const matchesCat = activeCat === 'all' || card.dataset.cat === activeCat;
+      const haystack = (card.dataset.search + ' ' + card.textContent).toLowerCase();
+      const matchesTerm = !term || haystack.includes(term);
+      const show = matchesCat && matchesTerm;
+      card.classList.toggle('hidden', !show);
+      if (show){
+        visible++;
+        if (term) highlight(card, term);
+      }
+    });
+
+    emptyState.classList.toggle('hidden', visible !== 0);
+    resultCount.textContent = term ? (visible + ' match' + (visible === 1 ? '' : 'es')) : '';
+  }
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCat = btn.dataset.cat;
+      const [head, sub] = catLabels[activeCat];
+      sectionHead.textContent = head;
+      sectionSub.textContent = sub;
+      applyFilters();
+    });
+  });
+
+  search.addEventListener('input', applyFilters);
+
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.card');
+      const codeBlock = card.querySelector('pre');
+      const text = codeBlock ? codeBlock.textContent : card.querySelector('table').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'copied';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1400);
+      }).catch(() => {
+        btn.textContent = 'error';
+        setTimeout(() => { btn.textContent = 'copy'; }, 1400);
+      });
+    });
+  });
+
+  // keyboard shortcut: "/" focuses the search bar, like GitHub
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== search){
+      e.preventDefault();
+      search.focus();
+    }
+  });
+
+  applyFilters();
+})();
+</script>
+
+</body>
+</html>
