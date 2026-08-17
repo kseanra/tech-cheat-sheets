@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown Syntax — devref.sh</title>
+<meta name="description" content="Fast, dense, ad-free reference for CSS, JavaScript, Python, CLI commands, REST APIs and Markdown syntax.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="dots"><span></span><span></span><span></span></div>
+  <div class="filename">~/<b>devref.sh</b></div>
+  <div class="grepbar">
+    <span class="prompt">grep -i</span>
+    <input type="text" id="search" placeholder="flex, useState, git rebase, 404…" autocomplete="off">
+    <span class="cursor"></span>
+  </div>
+  <div class="result-count" id="resultCount"></div>
+</div>
+
+<div class="shell">
+  <nav class="tabs" id="tabs">
+    <div class="eyebrow">// categories</div>
+    <a class="tab-btn" href="index.html">all <span class="count">15</span></a>
+    <a class="tab-btn" href="css.html">css<span class="count">3</span></a>
+    <a class="tab-btn" href="javascript.html">javascript<span class="count">3</span></a>
+    <a class="tab-btn" href="python.html">python<span class="count">3</span></a>
+    <a class="tab-btn" href="cli.html">cli / git<span class="count">3</span></a>
+    <a class="tab-btn" href="api.html">api ref<span class="count">2</span></a>
+    <a class="tab-btn active" href="markdown.html">markdown<span class="count">1</span></a>
+  </nav>
+
+  <main>
+    <h1 class="section-head" id="sectionHead">Markdown syntax</h1>
+    <p class="section-sub" id="sectionSub">The full syntax table for READMEs, docs and chat formatting.</p>
+
+    <div id="cardStream">
+
+      <article class="card" data-cat="markdown" data-search="markdown syntax headers bold italic links code table syntax">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>syntax.md</b></span>
+          <span class="tag">md</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <table class="ref-table">
+          <tr><th>Syntax</th><th>Renders as</th></tr>
+          <tr><td><code># Heading</code></td><td class="muted">Heading level 1–6 (repeat #)</td></tr>
+          <tr><td><code>**bold**</code> / <code>*italic*</code></td><td class="muted"><strong>bold</strong> / <em>italic</em></td></tr>
+          <tr><td><code>[text](url)</code></td><td class="muted">A hyperlink</td></tr>
+          <tr><td><code>![alt](url)</code></td><td class="muted">An embedded image</td></tr>
+          <tr><td><code>`inline code`</code></td><td class="muted">Monospaced inline code</td></tr>
+          <tr><td><code>```lang ... ```</code></td><td class="muted">Fenced, syntax-highlighted code block</td></tr>
+          <tr><td><code>- item</code> / <code>1. item</code></td><td class="muted">Bulleted / numbered list</td></tr>
+          <tr><td><code>&gt; quote</code></td><td class="muted">Blockquote</td></tr>
+          <tr><td><code>| a | b |</code></td><td class="muted">Table row (header separator: <code>|---|---|</code>)</td></tr>
+        </table>
+      </article>
+
+    </div>
+
+    <div class="empty-state hidden" id="emptyState">
+      <span class="prompt">$</span> grep: no matches found for your query
+    </div>
+  </main>
+</div>
+
+<footer>
+  <span>devref.sh — static, ad-free, zero telemetry</span>
+  <span id="footerCount">6 categories · 15 references</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,37 +1,8 @@
 (function(){
   const cards = Array.from(document.querySelectorAll('.card'));
-  const tabs = Array.from(document.querySelectorAll('.tab-btn'));
   const search = document.getElementById('search');
   const resultCount = document.getElementById('resultCount');
   const emptyState = document.getElementById('emptyState');
-  const sectionHead = document.getElementById('sectionHead');
-  const sectionSub = document.getElementById('sectionSub');
-
-  const catLabels = {
-    all: ['All references', 'Every snippet, table and command on this page — filter with the grep bar or a category tab.'],
-    css: ['CSS', 'Layout and styling patterns worth keeping within arm’s reach.'],
-    js: ['JavaScript', 'Core language and browser-API patterns used in most day-to-day code.'],
-    python: ['Python', 'Idiomatic patterns that show up in almost every script or service.'],
-    cli: ['CLI & Git', 'Commands typed often enough to outlive any GUI wrapper.'],
-    api: ['API reference', 'Status codes and REST verbs, the vocabulary of every HTTP API.'],
-    markdown: ['Markdown syntax', 'The full syntax table for READMEs, docs and chat formatting.']
-  };
-
-  // populate per-category counts once
-  function updateCounts(){
-    const counts = { all: cards.length };
-    cards.forEach(c => {
-      const cat = c.dataset.cat;
-      counts[cat] = (counts[cat] || 0) + 1;
-    });
-    Object.keys(counts).forEach(cat => {
-      const el = document.getElementById('count-' + cat);
-      if (el) el.textContent = counts[cat];
-    });
-  }
-  updateCounts();
-
-  let activeCat = 'all';
 
   function stripHighlights(el){
     el.querySelectorAll('mark').forEach(m => {
@@ -60,12 +31,10 @@
 
     cards.forEach(card => {
       stripHighlights(card);
-      const matchesCat = activeCat === 'all' || card.dataset.cat === activeCat;
       const haystack = (card.dataset.search + ' ' + card.textContent).toLowerCase();
-      const matchesTerm = !term || haystack.includes(term);
-      const show = matchesCat && matchesTerm;
-      card.classList.toggle('hidden', !show);
-      if (show){
+      const matches = !term || haystack.includes(term);
+      card.classList.toggle('hidden', !matches);
+      if (matches){
         visible++;
         if (term) highlight(card, term);
       }
@@ -74,18 +43,6 @@
     emptyState.classList.toggle('hidden', visible !== 0);
     resultCount.textContent = term ? (visible + ' match' + (visible === 1 ? '' : 'es')) : '';
   }
-
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabs.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeCat = btn.dataset.cat;
-      const [head, sub] = catLabels[activeCat];
-      sectionHead.textContent = head;
-      sectionSub.textContent = sub;
-      applyFilters();
-    });
-  });
 
   search.addEventListener('input', applyFilters);
 

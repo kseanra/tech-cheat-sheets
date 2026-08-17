@@ -25,13 +25,13 @@
 <div class="shell">
   <nav class="tabs" id="tabs">
     <div class="eyebrow">// categories</div>
-    <button class="tab-btn active" data-cat="all">all <span class="count" id="count-all"></span></button>
-    <button class="tab-btn" data-cat="css">css<span class="count" id="count-css"></span></button>
-    <button class="tab-btn" data-cat="js">javascript<span class="count" id="count-js"></span></button>
-    <button class="tab-btn" data-cat="python">python<span class="count" id="count-python"></span></button>
-    <button class="tab-btn" data-cat="cli">cli / git<span class="count" id="count-cli"></span></button>
-    <button class="tab-btn" data-cat="api">api ref<span class="count" id="count-api"></span></button>
-    <button class="tab-btn" data-cat="markdown">markdown<span class="count" id="count-markdown"></span></button>
+    <a class="tab-btn active" href="index.html">all <span class="count">15</span></a>
+    <a class="tab-btn" href="css.html">css<span class="count">3</span></a>
+    <a class="tab-btn" href="javascript.html">javascript<span class="count">3</span></a>
+    <a class="tab-btn" href="python.html">python<span class="count">3</span></a>
+    <a class="tab-btn" href="cli.html">cli / git<span class="count">3</span></a>
+    <a class="tab-btn" href="api.html">api ref<span class="count">2</span></a>
+    <a class="tab-btn" href="markdown.html">markdown<span class="count">1</span></a>
   </nav>
 
   <main>
@@ -231,6 +231,45 @@ tail -f server.log</pre>
         <p class="desc">Four commands that account for most terminal muscle memory on any given day.</p>
       </article>
 
+      <article class="card" data-cat="cli" data-search="git multiple github accounts gpg signing key ssh config work personal identity">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>multi-account-gpg.sh</b></span>
+          <span class="tag">cli</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="cm"># ~/.ssh/config — one Host alias per GitHub account</span>
+Host github.com-work
+  HostName github.com
+  User git
+  IdentityFile <span class="str">~/.ssh/id_ed25519_work</span>
+
+Host github.com-personal
+  HostName github.com
+  User git
+  IdentityFile <span class="str">~/.ssh/id_ed25519_personal</span>
+
+<span class="cm"># clone/push using the alias instead of "github.com"</span>
+git remote set-url origin git@github.com-work:org/repo.git
+
+<span class="cm"># ~/.gitconfig — route identity + signing key by folder</span>
+[includeIf <span class="str">"gitdir:~/work/"</span>]
+  path = <span class="str">~/.gitconfig-work</span>
+[includeIf <span class="str">"gitdir:~/personal/"</span>]
+  path = <span class="str">~/.gitconfig-personal</span>
+
+<span class="cm"># ~/.gitconfig-work</span>
+[user]
+  email = me@company.com
+  signingkey = AAAA1111
+[commit]
+  gpgsign = true
+
+<span class="cm"># confirm which key actually signed a commit</span>
+git log --show-signature -1</pre>
+        <p class="desc"><code>includeIf gitdir</code> swaps <code>user.email</code> and <code>signingkey</code> automatically based on which folder a repo lives in, while the SSH <code>Host</code> alias picks the matching key on push/pull — no manual switching, no global config to remember to change back.</p>
+      </article>
+
       <!-- API -->
       <article class="card" data-cat="api" data-search="http status codes 200 301 404 500 api reference">
         <div class="card-bar">
@@ -302,7 +341,7 @@ tail -f server.log</pre>
 
 <footer>
   <span>devref.sh — static, ad-free, zero telemetry</span>
-  <span id="footerCount">7 categories · 15 references</span>
+  <span id="footerCount">6 categories · 15 references</span>
 </footer>
 
 <script src="script.js"></script>

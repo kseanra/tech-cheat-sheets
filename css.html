@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Cheat Sheet — devref.sh</title>
+<meta name="description" content="Fast, dense, ad-free reference for CSS, JavaScript, Python, CLI commands, REST APIs and Markdown syntax.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="dots"><span></span><span></span><span></span></div>
+  <div class="filename">~/<b>devref.sh</b></div>
+  <div class="grepbar">
+    <span class="prompt">grep -i</span>
+    <input type="text" id="search" placeholder="flex, useState, git rebase, 404…" autocomplete="off">
+    <span class="cursor"></span>
+  </div>
+  <div class="result-count" id="resultCount"></div>
+</div>
+
+<div class="shell">
+  <nav class="tabs" id="tabs">
+    <div class="eyebrow">// categories</div>
+    <a class="tab-btn" href="index.html">all <span class="count">15</span></a>
+    <a class="tab-btn active" href="css.html">css<span class="count">3</span></a>
+    <a class="tab-btn" href="javascript.html">javascript<span class="count">3</span></a>
+    <a class="tab-btn" href="python.html">python<span class="count">3</span></a>
+    <a class="tab-btn" href="cli.html">cli / git<span class="count">3</span></a>
+    <a class="tab-btn" href="api.html">api ref<span class="count">2</span></a>
+    <a class="tab-btn" href="markdown.html">markdown<span class="count">1</span></a>
+  </nav>
+
+  <main>
+    <h1 class="section-head" id="sectionHead">CSS</h1>
+    <p class="section-sub" id="sectionSub">Layout and styling patterns worth keeping within arm’s reach.</p>
+
+    <div id="cardStream">
+
+      <article class="card" data-cat="css" data-search="css flexbox center flex justify-content align-items">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>flexbox-center.css</b></span>
+          <span class="tag">css</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="cm">/* perfectly center any child */</span>
+.container {
+  display: <span class="str">flex</span>;
+  justify-content: <span class="str">center</span>;
+  align-items: <span class="str">center</span>;
+  min-height: <span class="str">100vh</span>;
+}</pre>
+        <p class="desc">The one-liner every developer eventually memorizes. Works on any container; swap <code>min-height</code> for a fixed height if the parent isn't full-viewport.</p>
+      </article>
+
+      <article class="card" data-cat="css" data-search="css grid template areas layout named lines">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>grid-areas.css</b></span>
+          <span class="tag">css</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre>.layout {
+  display: <span class="str">grid</span>;
+  grid-template-areas:
+    <span class="str">"header header"</span>
+    <span class="str">"sidebar content"</span>
+    <span class="str">"footer footer"</span>;
+  grid-template-columns: <span class="str">220px 1fr</span>;
+}
+.header  { grid-area: <span class="str">header</span>;  }
+.sidebar { grid-area: <span class="str">sidebar</span>; }
+.content { grid-area: <span class="str">content</span>; }
+.footer  { grid-area: <span class="str">footer</span>;  }</pre>
+        <p class="desc">Named template areas read like ASCII art of the page itself — the fastest way to reason about a layout without counting grid lines.</p>
+      </article>
+
+      <article class="card" data-cat="css" data-search="css custom properties variables root theming">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>custom-properties.css</b></span>
+          <span class="tag">css</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="cm">/* define once, reuse everywhere */</span>
+:root {
+  --brand: <span class="str">#F2A65A</span>;
+  --gap: <span class="str">1.5rem</span>;
+}
+.button {
+  background: <span class="fn">var</span>(--brand);
+  padding: <span class="fn">var</span>(--gap);
+}</pre>
+        <p class="desc">Custom properties cascade and can be overridden per-component or per-media-query, unlike Sass variables which are compiled away.</p>
+      </article>
+
+    </div>
+
+    <div class="empty-state hidden" id="emptyState">
+      <span class="prompt">$</span> grep: no matches found for your query
+    </div>
+  </main>
+</div>
+
+<footer>
+  <span>devref.sh — static, ad-free, zero telemetry</span>
+  <span id="footerCount">6 categories · 15 references</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

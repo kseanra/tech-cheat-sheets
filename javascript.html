@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Cheat Sheet — devref.sh</title>
+<meta name="description" content="Fast, dense, ad-free reference for CSS, JavaScript, Python, CLI commands, REST APIs and Markdown syntax.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="dots"><span></span><span></span><span></span></div>
+  <div class="filename">~/<b>devref.sh</b></div>
+  <div class="grepbar">
+    <span class="prompt">grep -i</span>
+    <input type="text" id="search" placeholder="flex, useState, git rebase, 404…" autocomplete="off">
+    <span class="cursor"></span>
+  </div>
+  <div class="result-count" id="resultCount"></div>
+</div>
+
+<div class="shell">
+  <nav class="tabs" id="tabs">
+    <div class="eyebrow">// categories</div>
+    <a class="tab-btn" href="index.html">all <span class="count">15</span></a>
+    <a class="tab-btn" href="css.html">css<span class="count">3</span></a>
+    <a class="tab-btn active" href="javascript.html">javascript<span class="count">3</span></a>
+    <a class="tab-btn" href="python.html">python<span class="count">3</span></a>
+    <a class="tab-btn" href="cli.html">cli / git<span class="count">3</span></a>
+    <a class="tab-btn" href="api.html">api ref<span class="count">2</span></a>
+    <a class="tab-btn" href="markdown.html">markdown<span class="count">1</span></a>
+  </nav>
+
+  <main>
+    <h1 class="section-head" id="sectionHead">JavaScript</h1>
+    <p class="section-sub" id="sectionSub">Core language and browser-API patterns used in most day-to-day code.</p>
+
+    <div id="cardStream">
+
+      <article class="card" data-cat="js" data-search="javascript array map filter reduce methods">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>array-methods.js</b></span>
+          <span class="tag">js</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="kw">const</span> nums = [1, 2, 3, 4, 5];
+
+nums.<span class="fn">map</span>(n <span class="kw">=></span> n * 2);        <span class="cm">// [2,4,6,8,10]</span>
+nums.<span class="fn">filter</span>(n <span class="kw">=></span> n % 2 === 0); <span class="cm">// [2,4]</span>
+nums.<span class="fn">reduce</span>((a, b) <span class="kw">=></span> a + b);    <span class="cm">// 15</span></pre>
+        <p class="desc">Chain them: <code>nums.filter(n => n % 2).map(n => n * n)</code> reads left-to-right as "keep odds, then square."</p>
+      </article>
+
+      <article class="card" data-cat="js" data-search="javascript optional chaining nullish coalescing question mark">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>safe-access.js</b></span>
+          <span class="tag">js</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="cm">// optional chaining — stops instead of throwing</span>
+<span class="kw">const</span> city = user?.address?.city;
+
+<span class="cm">// nullish coalescing — fallback only for null/undefined</span>
+<span class="kw">const</span> name = user.name ?? <span class="str">'Anonymous'</span>;</pre>
+        <p class="desc">Unlike <code>||</code>, <code>??</code> won't replace <code>0</code>, <code>''</code>, or <code>false</code> — only <code>null</code>/<code>undefined</code>.</p>
+      </article>
+
+      <article class="card" data-cat="js" data-search="javascript fetch async await api request">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>fetch-async.js</b></span>
+          <span class="tag">js</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="kw">async function</span> <span class="fn">getUser</span>(id) {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">`/api/users/${id}`</span>);
+    <span class="kw">if</span> (!res.ok) <span class="kw">throw new</span> <span class="fn">Error</span>(res.status);
+    <span class="kw">return await</span> res.json();
+  } <span class="kw">catch</span> (err) {
+    console.<span class="fn">error</span>(<span class="str">'Fetch failed:'</span>, err);
+  }
+}</pre>
+        <p class="desc">Always check <code>res.ok</code> — <code>fetch</code> only rejects on network failure, not on 4xx/5xx responses.</p>
+      </article>
+
+    </div>
+
+    <div class="empty-state hidden" id="emptyState">
+      <span class="prompt">$</span> grep: no matches found for your query
+    </div>
+  </main>
+</div>
+
+<footer>
+  <span>devref.sh — static, ad-free, zero telemetry</span>
+  <span id="footerCount">6 categories · 15 references</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

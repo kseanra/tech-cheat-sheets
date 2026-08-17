@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLI & Git Cheat Sheet — devref.sh</title>
+<meta name="description" content="Fast, dense, ad-free reference for CSS, JavaScript, Python, CLI commands, REST APIs and Markdown syntax.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="dots"><span></span><span></span><span></span></div>
+  <div class="filename">~/<b>devref.sh</b></div>
+  <div class="grepbar">
+    <span class="prompt">grep -i</span>
+    <input type="text" id="search" placeholder="flex, useState, git rebase, 404…" autocomplete="off">
+    <span class="cursor"></span>
+  </div>
+  <div class="result-count" id="resultCount"></div>
+</div>
+
+<div class="shell">
+  <nav class="tabs" id="tabs">
+    <div class="eyebrow">// categories</div>
+    <a class="tab-btn" href="index.html">all <span class="count">15</span></a>
+    <a class="tab-btn" href="css.html">css<span class="count">3</span></a>
+    <a class="tab-btn" href="javascript.html">javascript<span class="count">3</span></a>
+    <a class="tab-btn" href="python.html">python<span class="count">3</span></a>
+    <a class="tab-btn active" href="cli.html">cli / git<span class="count">3</span></a>
+    <a class="tab-btn" href="api.html">api ref<span class="count">2</span></a>
+    <a class="tab-btn" href="markdown.html">markdown<span class="count">1</span></a>
+  </nav>
+
+  <main>
+    <h1 class="section-head" id="sectionHead">CLI & Git</h1>
+    <p class="section-sub" id="sectionSub">Commands typed often enough to outlive any GUI wrapper.</p>
+
+    <div id="cardStream">
+
+      <article class="card" data-cat="cli" data-search="git commands cli status add commit push pull branch merge rebase stash">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>git-essentials.sh</b></span>
+          <span class="tag">cli</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <table class="ref-table">
+          <tr><th>Command</th><th>What it does</th></tr>
+          <tr><td><code>git status</code></td><td>Show staged, unstaged and untracked changes</td></tr>
+          <tr><td><code>git add -p</code></td><td>Stage changes interactively, hunk by hunk</td></tr>
+          <tr><td><code>git commit -m "msg"</code></td><td>Commit staged changes with a message</td></tr>
+          <tr><td><code>git switch -c name</code></td><td>Create and switch to a new branch</td></tr>
+          <tr><td><code>git rebase -i HEAD~3</code></td><td>Interactively edit the last 3 commits</td></tr>
+          <tr><td><code>git stash / stash pop</code></td><td>Shelve changes, then reapply them later</td></tr>
+          <tr><td><code>git log --oneline --graph</code></td><td>Compact, visual commit history</td></tr>
+        </table>
+      </article>
+
+      <article class="card" data-cat="cli" data-search="bash one liners find grep xargs pipe terminal shell">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>bash-one-liners.sh</b></span>
+          <span class="tag">cli</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="cm"># find files modified in the last day</span>
+find . -mtime -1 -type f
+
+<span class="cm"># recursively grep for a string, show line numbers</span>
+grep -rn <span class="str">"TODO"</span> ./src
+
+<span class="cm"># kill whatever is holding port 3000</span>
+lsof -ti:3000 | xargs kill -9
+
+<span class="cm"># watch a log file live</span>
+tail -f server.log</pre>
+        <p class="desc">Four commands that account for most terminal muscle memory on any given day.</p>
+      </article>
+
+      <article class="card" data-cat="cli" data-search="git multiple github accounts gpg signing key ssh config work personal identity">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>multi-account-gpg.sh</b></span>
+          <span class="tag">cli</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="cm"># ~/.ssh/config — one Host alias per GitHub account</span>
+Host github.com-work
+  HostName github.com
+  User git
+  IdentityFile <span class="str">~/.ssh/id_ed25519_work</span>
+
+Host github.com-personal
+  HostName github.com
+  User git
+  IdentityFile <span class="str">~/.ssh/id_ed25519_personal</span>
+
+<span class="cm"># clone/push using the alias instead of "github.com"</span>
+git remote set-url origin git@github.com-work:org/repo.git
+
+<span class="cm"># ~/.gitconfig — route identity + signing key by folder</span>
+[includeIf <span class="str">"gitdir:~/work/"</span>]
+  path = <span class="str">~/.gitconfig-work</span>
+[includeIf <span class="str">"gitdir:~/personal/"</span>]
+  path = <span class="str">~/.gitconfig-personal</span>
+
+<span class="cm"># ~/.gitconfig-work</span>
+[user]
+  email = me@company.com
+  signingkey = AAAA1111
+[commit]
+  gpgsign = true
+
+<span class="cm"># confirm which key actually signed a commit</span>
+git log --show-signature -1</pre>
+        <p class="desc"><code>includeIf gitdir</code> swaps <code>user.email</code> and <code>signingkey</code> automatically based on which folder a repo lives in, while the SSH <code>Host</code> alias picks the matching key on push/pull — no manual switching, no global config to remember to change back.</p>
+      </article>
+
+    </div>
+
+    <div class="empty-state hidden" id="emptyState">
+      <span class="prompt">$</span> grep: no matches found for your query
+    </div>
+  </main>
+</div>
+
+<footer>
+  <span>devref.sh — static, ad-free, zero telemetry</span>
+  <span id="footerCount">6 categories · 15 references</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

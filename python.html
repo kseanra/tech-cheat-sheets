@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Cheat Sheet — devref.sh</title>
+<meta name="description" content="Fast, dense, ad-free reference for CSS, JavaScript, Python, CLI commands, REST APIs and Markdown syntax.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="dots"><span></span><span></span><span></span></div>
+  <div class="filename">~/<b>devref.sh</b></div>
+  <div class="grepbar">
+    <span class="prompt">grep -i</span>
+    <input type="text" id="search" placeholder="flex, useState, git rebase, 404…" autocomplete="off">
+    <span class="cursor"></span>
+  </div>
+  <div class="result-count" id="resultCount"></div>
+</div>
+
+<div class="shell">
+  <nav class="tabs" id="tabs">
+    <div class="eyebrow">// categories</div>
+    <a class="tab-btn" href="index.html">all <span class="count">15</span></a>
+    <a class="tab-btn" href="css.html">css<span class="count">3</span></a>
+    <a class="tab-btn" href="javascript.html">javascript<span class="count">3</span></a>
+    <a class="tab-btn active" href="python.html">python<span class="count">3</span></a>
+    <a class="tab-btn" href="cli.html">cli / git<span class="count">3</span></a>
+    <a class="tab-btn" href="api.html">api ref<span class="count">2</span></a>
+    <a class="tab-btn" href="markdown.html">markdown<span class="count">1</span></a>
+  </nav>
+
+  <main>
+    <h1 class="section-head" id="sectionHead">Python</h1>
+    <p class="section-sub" id="sectionSub">Idiomatic patterns that show up in almost every script or service.</p>
+
+    <div id="cardStream">
+
+      <article class="card" data-cat="python" data-search="python list comprehension loop generator">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>comprehensions.py</b></span>
+          <span class="tag">python</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre>squares = [n**2 <span class="kw">for</span> n <span class="kw">in</span> range(10)]
+evens   = [n <span class="kw">for</span> n <span class="kw">in</span> range(20) <span class="kw">if</span> n % 2 == 0]
+pairs   = {n: n**2 <span class="kw">for</span> n <span class="kw">in</span> range(5)}   <span class="cm"># dict comprehension</span></pre>
+        <p class="desc">Readable up to one <code>for</code> and one <code>if</code>. Beyond that, a plain loop is usually clearer to the next reader.</p>
+      </article>
+
+      <article class="card" data-cat="python" data-search="python f-strings formatting string interpolation">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>f-strings.py</b></span>
+          <span class="tag">python</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre>name, score = <span class="str">"Ada"</span>, 97.436
+
+<span class="fn">print</span>(<span class="str">f"{name} scored {score:.1f}%"</span>)   <span class="cm"># Ada scored 97.4%</span>
+<span class="fn">print</span>(<span class="str">f"{name!r} → {score=}"</span>)          <span class="cm"># 'Ada' → score=97.436</span></pre>
+        <p class="desc">The <code>=</code> specifier (3.8+) prints the expression and its value together — handy for quick debugging without a separate <code>print</code>.</p>
+      </article>
+
+      <article class="card" data-cat="python" data-search="python context manager with open file">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>context-manager.py</b></span>
+          <span class="tag">python</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="kw">with</span> <span class="fn">open</span>(<span class="str">"data.txt"</span>) <span class="kw">as</span> f:
+    lines = f.readlines()
+<span class="cm"># file is closed automatically here, even on error</span></pre>
+        <p class="desc">Use <code>with</code> for anything that needs cleanup — files, locks, DB connections. It guarantees teardown even if the block raises.</p>
+      </article>
+
+    </div>
+
+    <div class="empty-state hidden" id="emptyState">
+      <span class="prompt">$</span> grep: no matches found for your query
+    </div>
+  </main>
+</div>
+
+<footer>
+  <span>devref.sh — static, ad-free, zero telemetry</span>
+  <span id="footerCount">6 categories · 15 references</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
