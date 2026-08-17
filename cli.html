@@ -25,11 +25,11 @@
 <div class="shell">
   <nav class="tabs" id="tabs">
     <div class="eyebrow">// categories</div>
-    <a class="tab-btn" href="index.html">all <span class="count">15</span></a>
+    <a class="tab-btn" href="index.html">all <span class="count">16</span></a>
     <a class="tab-btn" href="css.html">css<span class="count">3</span></a>
     <a class="tab-btn" href="javascript.html">javascript<span class="count">3</span></a>
     <a class="tab-btn" href="python.html">python<span class="count">3</span></a>
-    <a class="tab-btn active" href="cli.html">cli / git<span class="count">3</span></a>
+    <a class="tab-btn active" href="cli.html">cli / git<span class="count">4</span></a>
     <a class="tab-btn" href="api.html">api ref<span class="count">2</span></a>
     <a class="tab-btn" href="markdown.html">markdown<span class="count">1</span></a>
   </nav>
@@ -78,6 +78,33 @@ lsof -ti:3000 | xargs kill -9
 <span class="cm"># watch a log file live</span>
 tail -f server.log</pre>
         <p class="desc">Four commands that account for most terminal muscle memory on any given day.</p>
+      </article>
+
+      <article class="card" data-cat="cli" data-search="gpg key generate github verified commits sign public key export signingkey">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>gpg-github-setup.sh</b></span>
+          <span class="tag">cli</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="cm"># 1. generate a key (choose RSA/ed25519, then a name + email + passphrase)</span>
+gpg --full-generate-key
+
+<span class="cm"># 2. find the key ID (the part after the algorithm, e.g. "3AA5C34371567BD2")</span>
+gpg --list-secret-keys --keyid-format=long
+
+<span class="cm"># 3. export the public key in the armored format GitHub expects</span>
+gpg --armor --export <span class="str">&lt;KEY_ID&gt;</span>
+
+<span class="cm"># 4. GitHub → Settings → SSH and GPG keys → New GPG key → paste the exported block</span>
+
+<span class="cm"># 5. tell git to sign every commit with that key</span>
+git config --global user.signingkey <span class="str">&lt;KEY_ID&gt;</span>
+git config --global commit.gpgsign true
+
+<span class="cm"># one-off signed commit, if global gpgsign is off</span>
+git commit -S -m <span class="str">"message"</span></pre>
+        <p class="desc">The email on the GPG key (<code>gpg --list-secret-keys</code>) must match a verified email on your GitHub account, or commits show up as unverified. Push and check for the "Verified" badge on GitHub to confirm it worked. See <code>multi-account-gpg.sh</code> below for juggling more than one key.</p>
       </article>
 
       <article class="card" data-cat="cli" data-search="git multiple github accounts gpg signing key ssh config work personal identity">
@@ -129,7 +156,7 @@ git log --show-signature -1</pre>
 
 <footer>
   <span>devref.sh — static, ad-free, zero telemetry</span>
-  <span id="footerCount">6 categories · 15 references</span>
+  <span id="footerCount">6 categories · 16 references</span>
 </footer>
 
 <script src="script.js"></script>
