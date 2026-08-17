@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3830116872007511"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Docker CLI Cheat Sheet — devref.sh</title>
+<meta name="description" content="Fast, dense, ad-free reference for Docker CLI commands and examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="dots"><span></span><span></span><span></span></div>
+  <div class="filename">~/<b>devref.sh</b></div>
+  <div class="grepbar">
+    <span class="prompt">grep -i</span>
+    <input type="text" id="search" placeholder="docker run, docker build, volumes…" autocomplete="off">
+    <span class="cursor"></span>
+  </div>
+  <div class="result-count" id="resultCount"></div>
+</div>
+
+<div class="shell">
+  <nav class="tabs" id="tabs">
+    <div class="eyebrow">// categories</div>
+    <a class="tab-btn" href="index.html">all <span class="count">17</span></a>
+    <a class="tab-btn" href="css.html">css<span class="count">3</span></a>
+    <a class="tab-btn" href="javascript.html">javascript<span class="count">3</span></a>
+    <a class="tab-btn" href="python.html">python<span class="count">3</span></a>
+    <a class="tab-btn" href="cli.html">cli / git<span class="count">5</span></a>
+    <a class="tab-btn active" href="docker.html">docker<span class="count">1</span></a>
+    <a class="tab-btn" href="api.html">api ref<span class="count">2</span></a>
+    <a class="tab-btn" href="markdown.html">markdown<span class="count">1</span></a>
+  </nav>
+
+  <main>
+    <h1 class="section-head" id="sectionHead">Docker CLI</h1>
+    <p class="section-sub" id="sectionSub">Essential Docker commands and quick examples to get containers running locally.</p>
+
+    <div id="cardStream">
+
+      <article class="card" data-cat="cli" data-search="docker docker-cli container image run pull build images ps exec logs stop rm rmi volumes network dockerfile">
+        <div class="card-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="card-title"><b>docker-basics.sh</b></span>
+          <span class="tag">cli</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><span class="cm"># show Docker version</span>
+docker --version
+
+<span class="cm"># test installation (runs a tiny container that prints a message)</span>
+docker run hello-world
+
+<span class="cm"># pull an image from Docker Hub</span>
+docker pull nginx:latest
+
+<span class="cm"># list images on the local machine</span>
+docker images
+
+<span class="cm"># list running containers</span>
+docker ps
+
+<span class="cm"># list all containers (including stopped)</span>
+docker ps -a
+
+<span class="cm"># run a container in the background, map port 80</span>
+docker run -d -p 8080:80 --name web nginx:latest
+
+<span class="cm"># run an interactive shell in a new container and remove when exited</span>
+docker run --rm -it alpine sh
+
+<span class="cm"># run a command in a running container (get a shell)</span>
+docker exec -it web /bin/bash
+
+<span class="cm"># view live logs for a container</span>
+docker logs -f web
+
+<span class="cm"># stop / start a container</span>
+docker stop web
+
+docker start web
+
+<span class="cm"># remove a stopped container</span>
+docker rm web
+
+<span class="cm"># remove an image</span>
+docker rmi nginx:latest
+
+<span class="cm"># build an image from a Dockerfile in the current dir</span>
+docker build -t myapp:latest .
+
+<span class="cm"># helpful cleanup: remove dangling images</span>
+docker image prune -f</pre>
+        <p class="desc">Essential Docker CLI commands to get containers running, inspect images/containers, and perform cleanup.</p>
+      </article>
+
+    </div>
+
+    <div class="empty-state hidden" id="emptyState">
+      <span class="prompt">$</span> grep: no matches found for your query
+    </div>
+  </main>
+
+  <aside class="ad-rail">
+    <span class="ad-label">Advertisement</span>
+    <!-- tech-ad -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3830116872007511"
+         data-ad-slot="1171484549"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+</div>
+
+<footer>
+  <span>devref.sh — static, ad-free, zero telemetry</span>
+  <span id="footerCount">7 categories · 17 references</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
