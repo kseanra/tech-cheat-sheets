@@ -27,13 +27,14 @@
 <div class="shell">
   <nav class="tabs" id="tabs">
     <div class="eyebrow">// categories</div>
-    <a class="tab-btn active" href="index.html">all <span class="count">16</span></a>
+    <a class="tab-btn active" href="index.html">all <span class="count">17</span></a>
     <a class="tab-btn" href="css.html">css<span class="count">3</span></a>
     <a class="tab-btn" href="javascript.html">javascript<span class="count">3</span></a>
     <a class="tab-btn" href="python.html">python<span class="count">3</span></a>
     <a class="tab-btn" href="cli.html">cli / git<span class="count">4</span></a>
     <a class="tab-btn" href="api.html">api ref<span class="count">2</span></a>
     <a class="tab-btn" href="markdown.html">markdown<span class="count">1</span></a>
+    <a class="tab-btn" href="docker.html">docker<span class="count">1</span></a>
   </nav>
 
   <main>
@@ -174,8 +175,8 @@ pairs   = {n: n**2 <span class="kw">for</span> n <span class="kw">in</span> rang
         </div>
         <pre>name, score = <span class="str">"Ada"</span>, 97.436
 
-<span class="fn">print</span>(<span class="str">f"{name} scored {score:.1f}%"</span>)   <span class="cm"># Ada scored 97.4%</span>
-<span class="fn">print</span>(<span class="str">f"{name!r} → {score=}"</span>)          <span class="cm"># 'Ada' → score=97.436</span></pre>
+<span class="fn">print</span>(<span class="str">f"{name} scored {score:.1f}%"</span>)   <span class="cm">// Ada scored 97.4%</span>
+<span class="fn">print</span>(<span class="str">f"{name!r} → {score=}"</span>)          <span class="cm">// 'Ada' → score=97.436</span></pre>
         <p class="desc">The <code>=</code> specifier (3.8+) prints the expression and its value together — handy for quick debugging without a separate <code>print</code>.</p>
       </article>
 
@@ -188,7 +189,7 @@ pairs   = {n: n**2 <span class="kw">for</span> n <span class="kw">in</span> rang
         </div>
         <pre><span class="kw">with</span> <span class="fn">open</span>(<span class="str">"data.txt"</span>) <span class="kw">as</span> f:
     lines = f.readlines()
-<span class="cm"># file is closed automatically here, even on error</span></pre>
+<span class="cm">// file is closed automatically here, even on error</span></pre>
         <p class="desc">Use <code>with</code> for anything that needs cleanup — files, locks, DB connections. It guarantees teardown even if the block raises.</p>
       </article>
 
@@ -257,7 +258,7 @@ git config --global commit.gpgsign true
 
 <span class="cm"># one-off signed commit, if global gpgsign is off</span>
 git commit -S -m <span class="str">"message"</span></pre>
-        <p class="desc">The email on the GPG key (<code>gpg --list-secret-keys</code>) must match a verified email on your GitHub account, or commits show up as unverified. Push and check for the "Verified" badge on GitHub to confirm it worked. See <code>multi-account-gpg.sh</code> below for juggling more than one key.</p>
+        <p class="desc">The email on the GPG key (<code>gpg --list-secret-keys</code>) must match a verified email on your GitHub account, or commits show up as unverified. Push and check for the[...]
       </article>
 
       <article class="card" data-cat="cli" data-search="git multiple github accounts gpg signing key ssh config work personal identity">
@@ -296,7 +297,7 @@ git remote set-url origin git@github.com-work:org/repo.git
 
 <span class="cm"># confirm which key actually signed a commit</span>
 git log --show-signature -1</pre>
-        <p class="desc"><code>includeIf gitdir</code> swaps <code>user.email</code> and <code>signingkey</code> automatically based on which folder a repo lives in, while the SSH <code>Host</code> alias picks the matching key on push/pull — no manual switching, no global config to remember to change back.</p>
+        <p class="desc"><code>includeIf gitdir</code> swaps <code>user.email</code> and <code>signingkey</code> automatically based on which folder a repo lives in, while the SSH <code>Host</code>[...]
       </article>
 
       <!-- API -->
@@ -384,7 +385,7 @@ git log --show-signature -1</pre>
 
 <footer>
   <span>devref.sh — static, ad-free, zero telemetry</span>
-  <span id="footerCount">6 categories · 16 references</span>
+  <span id="footerCount">7 categories · 17 references</span>
 </footer>
 
 <script src="script.js"></script>
