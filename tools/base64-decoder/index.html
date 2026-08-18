@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3830116872007511"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64 Decoder (Free, Online, UTF-8 Safe) | DevFixTools</title>
+<meta name="description" content="Decode Base64 back to text online. UTF-8 safe, runs entirely in your browser — nothing is uploaded. Clear error if the input isn't valid Base64.">
+<link rel="canonical" href="https://devfixtools.com/tools/base64-decoder/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B0E14'/%3E%3Ctext x='50' y='66' font-size='46' font-family='monospace' font-weight='700' fill='%23F2A65A' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="shell no-sidebar">
+  <main class="wide">
+    <div class="eyebrow-crumb"><a href="/">home</a> / <a href="/tools/">tools</a> / base64 decoder</div>
+    <div class="tool-head">
+      <h1 class="section-head">Base64 Decoder</h1>
+      <p class="section-sub">Decode a Base64 string back to readable text. Handles UTF-8 correctly and reports invalid padding or characters clearly.</p>
+    </div>
+
+    <div class="tool-panel">
+      <div class="panel-label">Base64</div>
+      <textarea id="b64Input" placeholder="Paste Base64 to decode…" spellcheck="false"></textarea>
+    </div>
+
+    <div class="tool-actions">
+      <button class="btn primary" id="btnDecode">Decode</button>
+      <button class="btn" id="btnEncode">Encode</button>
+      <button class="btn" id="btnSwap">Swap ⇅</button>
+      <button class="btn" id="btnCopy">Copy output</button>
+      <button class="btn" id="btnClear">Clear</button>
+    </div>
+
+    <div class="tool-error" id="b64Error"></div>
+
+    <div class="tool-panel">
+      <div class="panel-label">Text</div>
+      <pre class="tool-output" id="b64Output"></pre>
+    </div>
+
+    <div class="prose">
+      <h2>Why decoding sometimes fails</h2>
+      <p>A Base64 string must be made up only of <code>A–Z</code>, <code>a–z</code>, <code>0–9</code>, <code>+</code>, <code>/</code>, and end with the correct amount of <code>=</code> padding (the total length must be a multiple of 4). Copy-pasting from an email client or chat app can silently strip trailing <code>=</code> characters or introduce line breaks — both will cause a decode error here.</p>
+      <p>Need to go the other way? Use the <a href="/tools/base64-encoder/">Base64 Encoder</a>, or hit <b>Swap</b> above to flip the input/output in place.</p>
+    </div>
+  </main>
+
+  <aside class="ad-rail">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3830116872007511"
+         data-ad-slot="1171484549"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+</div>
+
+<div id="site-footer"></div>
+
+<script>window.TOOL_DEFAULT_MODE = 'decode';</script>
+<script src="/assets/js/site-search.js"></script>
+<script src="/assets/js/chrome.js"></script>
+<script src="/assets/js/tools/base64.js"></script>
+</body>
+</html>

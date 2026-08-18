@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3830116872007511"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git error: fatal: not a git repository — fix it | DevFixTools</title>
+<meta name="description" content="Fix Git's 'fatal: not a git repository (or any of the parent directories): .git' error. Learn why it happens and how to fix or recover it.">
+<link rel="canonical" href="https://devfixtools.com/errors/git/fatal-not-a-git-repository/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B0E14'/%3E%3Ctext x='50' y='66' font-size='46' font-family='monospace' font-weight='700' fill='%23F2A65A' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="shell no-sidebar">
+  <main class="wide">
+    <div class="eyebrow-crumb"><a href="/">home</a> / <a href="/errors/">errors</a> / <a href="/errors/">git</a> / fatal not a git repository</div>
+    <h1 class="section-head">Git: fatal: not a git repository</h1>
+    <p class="section-sub">What this means, why Git can't find a repo here, and how to fix or recover it.</p>
+
+    <div class="prose">
+      <h2>The error</h2>
+      <p>You ran a git command — <code>git status</code>, <code>git log</code>, <code>git add</code>, whatever — and got:</p>
+      <pre>fatal: not a git repository (or any of the parent directories): .git</pre>
+
+      <h2>Why it happens</h2>
+      <p>Git commands work by walking up from your current directory looking for a <code>.git</code> folder — the hidden directory that actually stores the repository's history, objects, and refs. This error means Git walked all the way up to the filesystem root without finding one. Usually that's because:</p>
+      <ul>
+        <li>You're in a plain folder that was never initialized with <code>git init</code> or cloned with <code>git clone</code>.</li>
+        <li>You <code>cd</code>'d into the wrong directory — a sibling folder, or one level above/below the actual repo.</li>
+        <li>The <code>.git</code> folder inside your project got deleted, moved, or corrupted (accidentally, by a cleanup script, or by a bad merge tool).</li>
+      </ul>
+
+      <h2>Fix it</h2>
+      <p>First, confirm where you actually are and what's around you:</p>
+      <pre>pwd
+ls -la</pre>
+      <p>If you can see a <code>.git</code> folder in a nearby directory (parent, sibling, or subfolder), just <code>cd</code> into the correct one:</p>
+      <pre>cd /path/to/the/actual/repo
+git status</pre>
+      <p>If this is genuinely a new project and you meant to start tracking it with Git for the first time, initialize a repository here:</p>
+      <pre>git init</pre>
+      <p>If <code>.git</code> used to exist in this exact folder and is now gone, a bare <code>git init</code> only creates an <i>empty</i> repository — it does not recover your previous commit history, branches, or remotes. In that case your best option is usually to re-clone from the remote (GitHub, GitLab, etc.) if one exists:</p>
+      <pre>git clone &lt;remote-url&gt; .</pre>
+      <p>If there's no remote and no backup, the history is likely unrecoverable — check any local backups, IDE local history, or CI artifacts that might still hold a copy.</p>
+
+      <h2>Related: checking where you are</h2>
+      <p>To quickly confirm you're inside a Git working tree (and see its actual root, in case of nested folders), run:</p>
+      <pre>git rev-parse --show-toplevel</pre>
+      <p>If that also fails with the same "not a git repository" error, you've confirmed there is no <code>.git</code> anywhere above your current directory — go straight to the "Fix it" section above.</p>
+    </div>
+  </main>
+
+  <aside class="ad-rail">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3830116872007511"
+         data-ad-slot="1171484549"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="/assets/js/site-search.js"></script>
+<script src="/assets/js/chrome.js"></script>
+</body>
+</html>

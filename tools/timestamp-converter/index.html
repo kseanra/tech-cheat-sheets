@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3830116872007511"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unix Timestamp Converter — Epoch to Date &amp; Back | DevFixTools</title>
+<meta name="description" content="Convert a Unix timestamp to a human-readable date, or a date to a Unix timestamp, in seconds or milliseconds. Runs entirely in your browser.">
+<link rel="canonical" href="https://devfixtools.com/tools/timestamp-converter/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B0E14'/%3E%3Ctext x='50' y='66' font-size='46' font-family='monospace' font-weight='700' fill='%23F2A65A' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="shell no-sidebar">
+  <main class="wide">
+    <div class="eyebrow-crumb"><a href="/">home</a> / <a href="/tools/">tools</a> / timestamp converter</div>
+    <div class="tool-head">
+      <h1 class="section-head">Timestamp Converter</h1>
+      <p class="section-sub">Convert a Unix timestamp to a readable date, or a date to a Unix timestamp — both directions, in seconds or milliseconds.</p>
+    </div>
+
+    <div class="tool-panel">
+      <div class="panel-label">Unix timestamp → date</div>
+      <div style="padding:16px 18px;">
+        <div class="field-row" style="margin-bottom:12px;">
+          <input type="text" id="unixInput" placeholder="1700000000" style="flex:1; min-width:180px;">
+          <label for="unixUnit">unit
+            <select id="unixUnit">
+              <option value="seconds" selected>seconds</option>
+              <option value="milliseconds">milliseconds</option>
+            </select>
+          </label>
+          <button class="btn" id="btnNow" type="button">Use now</button>
+        </div>
+        <div class="tool-error" id="unixError"></div>
+        <table class="ref-table">
+          <tr><th>Format</th><th>Value</th></tr>
+          <tr><td class="muted">Local time</td><td><code id="outLocal"></code></td></tr>
+          <tr><td class="muted">UTC</td><td><code id="outUtc"></code></td></tr>
+          <tr><td class="muted">ISO 8601</td><td><code id="outIso"></code></td></tr>
+          <tr><td class="muted">Relative</td><td><code id="outRelative"></code></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="tool-panel">
+      <div class="panel-label">Date → Unix timestamp</div>
+      <div style="padding:16px 18px;">
+        <div class="field-row" style="margin-bottom:12px;">
+          <input type="datetime-local" id="humanInput" style="flex:1; min-width:220px;">
+          <button class="btn" id="btnUseNowHuman" type="button">Use now</button>
+        </div>
+        <div class="tool-error" id="humanError"></div>
+        <pre class="tool-output" id="outUnix"></pre>
+      </div>
+    </div>
+
+    <div class="prose">
+      <h2>What is a Unix timestamp?</h2>
+      <p>A Unix (epoch) timestamp counts seconds — or milliseconds, depending on the system — since <code>00:00:00 UTC on 1 January 1970</code>. Databases, logs, and APIs frequently store time this way because it's a single unambiguous number with no timezone to misinterpret; use this page to move between that number and a date you can actually read.</p>
+    </div>
+  </main>
+
+  <aside class="ad-rail">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3830116872007511"
+         data-ad-slot="1171484549"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="/assets/js/site-search.js"></script>
+<script src="/assets/js/chrome.js"></script>
+<script src="/assets/js/tools/timestamp-converter.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://devfixtools.com/</loc></url>
+  <url><loc>https://devfixtools.com/tools/</loc></url>
+  <url><loc>https://devfixtools.com/tools/json-formatter/</loc></url>
+  <url><loc>https://devfixtools.com/tools/base64-encoder/</loc></url>
+  <url><loc>https://devfixtools.com/tools/base64-decoder/</loc></url>
+  <url><loc>https://devfixtools.com/tools/url-encoder/</loc></url>
+  <url><loc>https://devfixtools.com/tools/url-decoder/</loc></url>
+  <url><loc>https://devfixtools.com/tools/jwt-decoder/</loc></url>
+  <url><loc>https://devfixtools.com/tools/uuid-generator/</loc></url>
+  <url><loc>https://devfixtools.com/tools/timestamp-converter/</loc></url>
+  <url><loc>https://devfixtools.com/tools/regex-tester/</loc></url>
+  <url><loc>https://devfixtools.com/tools/regex-escape/</loc></url>
+  <url><loc>https://devfixtools.com/tools/html-encoder/</loc></url>
+  <url><loc>https://devfixtools.com/tools/sql-formatter/</loc></url>
+  <url><loc>https://devfixtools.com/tools/xml-formatter/</loc></url>
+  <url><loc>https://devfixtools.com/tools/unix-timestamp/</loc></url>
+  <url><loc>https://devfixtools.com/guides/</loc></url>
+  <url><loc>https://devfixtools.com/guides/css/</loc></url>
+  <url><loc>https://devfixtools.com/guides/javascript/</loc></url>
+  <url><loc>https://devfixtools.com/guides/python/</loc></url>
+  <url><loc>https://devfixtools.com/guides/cli/</loc></url>
+  <url><loc>https://devfixtools.com/guides/api/</loc></url>
+  <url><loc>https://devfixtools.com/guides/markdown/</loc></url>
+  <url><loc>https://devfixtools.com/guides/docker/</loc></url>
+  <url><loc>https://devfixtools.com/errors/</loc></url>
+  <url><loc>https://devfixtools.com/errors/docker/container-name-in-use/</loc></url>
+  <url><loc>https://devfixtools.com/errors/git/fatal-not-a-git-repository/</loc></url>
+  <url><loc>https://devfixtools.com/blog/</loc></url>
+  <url><loc>https://devfixtools.com/about/</loc></url>
+  <url><loc>https://devfixtools.com/contact/</loc></url>
+  <url><loc>https://devfixtools.com/privacy/</loc></url>
+  <url><loc>https://devfixtools.com/terms/</loc></url>
+  <url><loc>https://devfixtools.com/cookie-policy/</loc></url>
+</urlset>

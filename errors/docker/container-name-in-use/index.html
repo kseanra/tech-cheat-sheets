@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3830116872007511"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Docker error: container name already in use — fix it | DevFixTools</title>
+<meta name="description" content="Fix Docker's 'Conflict. The container name is already in use' error. Learn why it happens and how to remove, rename, or force-replace the container.">
+<link rel="canonical" href="https://devfixtools.com/errors/docker/container-name-in-use/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B0E14'/%3E%3Ctext x='50' y='66' font-size='46' font-family='monospace' font-weight='700' fill='%23F2A65A' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="shell no-sidebar">
+  <main class="wide">
+    <div class="eyebrow-crumb"><a href="/">home</a> / <a href="/errors/">errors</a> / <a href="/errors/">docker</a> / container name already in use</div>
+    <h1 class="section-head">Docker: container name already in use</h1>
+    <p class="section-sub">What "Conflict. The container name is already in use" means, and the fastest way to get unstuck.</p>
+
+    <div class="prose">
+      <h2>The error</h2>
+      <p>You ran <code>docker run --name web ...</code> and Docker refused, with something like:</p>
+      <pre>docker: Error response from daemon: Conflict. The container name "/web" is already
+in use by container "8f3a2c1e9b4d". You have to remove (or rename) that container
+to be able to reuse that name.</pre>
+
+      <h2>Why it happens</h2>
+      <p>Container names in Docker must be unique on the host. When you stop a container with <code>docker stop</code>, the container isn't deleted — it just moves to the "Exited" state. It still holds on to its name (and its filesystem, logs, and exit code) until you explicitly remove it. So the next time you try to <code>docker run</code> a new container with that same <code>--name</code>, Docker sees the name is still claimed and refuses to start a duplicate.</p>
+      <p>This is especially common when a container crashes or you re-run a start script without cleaning up first — the old, stopped container is still sitting there.</p>
+
+      <h2>Fix it</h2>
+      <p>First, check what's holding the name (including stopped containers):</p>
+      <pre>docker ps -a --filter "name=web"</pre>
+      <p>If it's stopped, just remove it, then re-run your original command:</p>
+      <pre>docker rm web</pre>
+      <p>If it's still running and you want to replace it, force-remove it (this stops it first):</p>
+      <pre>docker rm -f web</pre>
+      <p>If you'd rather keep the old container around, give it a different name instead of removing it, or rename the existing one out of the way:</p>
+      <pre>docker rename web web-old
+docker run --name web ...</pre>
+
+      <h2>Prevent it next time</h2>
+      <p>For throwaway or short-lived containers — tests, one-off scripts, debugging sessions — add <code>--rm</code> so Docker automatically deletes the container (and frees its name) the moment it exits:</p>
+      <pre>docker run --rm --name web ...</pre>
+      <p>For long-running services you manage with a script, have the script remove any existing container with the same name before starting a new one, e.g. <code>docker rm -f web 2&gt;/dev/null; docker run --name web ...</code>, or better, use Docker Compose so container lifecycle is handled for you.</p>
+    </div>
+  </main>
+
+  <aside class="ad-rail">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3830116872007511"
+         data-ad-slot="1171484549"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="/assets/js/site-search.js"></script>
+<script src="/assets/js/chrome.js"></script>
+</body>
+</html>

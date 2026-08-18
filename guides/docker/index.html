@@ -5,41 +5,42 @@
      crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Docker CLI Cheat Sheet — devref.sh</title>
-<meta name="description" content="Fast, dense, ad-free reference for Docker CLI commands and examples.">
+<title>Docker Guide &amp; Cheat Sheet | DevFixTools</title>
+<meta name="description" content="Essential Docker CLI commands and quick examples to get containers running locally, inspect images/containers, and perform cleanup.">
+<link rel="canonical" href="https://devfixtools.com/guides/docker/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B0E14'/%3E%3Ctext x='50' y='66' font-size='46' font-family='monospace' font-weight='700' fill='%23F2A65A' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
 
-<div class="titlebar">
-  <div class="dots"><span></span><span></span><span></span></div>
-  <div class="filename">~/<b>devref.sh</b></div>
-  <div class="grepbar">
-    <span class="prompt">grep -i</span>
-    <input type="text" id="search" placeholder="docker run, docker build, volumes…" autocomplete="off">
-    <span class="cursor"></span>
-  </div>
-  <div class="result-count" id="resultCount"></div>
-</div>
+<div id="site-header"></div>
 
 <div class="shell">
-  <nav class="tabs" id="tabs">
-    <div class="eyebrow">// categories</div>
-    <a class="tab-btn" href="index.html">all <span class="count">17</span></a>
-    <a class="tab-btn" href="css.html">css<span class="count">3</span></a>
-    <a class="tab-btn" href="javascript.html">javascript<span class="count">3</span></a>
-    <a class="tab-btn" href="python.html">python<span class="count">3</span></a>
-    <a class="tab-btn" href="cli.html">cli / git<span class="count">5</span></a>
-    <a class="tab-btn active" href="docker.html">docker<span class="count">1</span></a>
-    <a class="tab-btn" href="api.html">api ref<span class="count">2</span></a>
-    <a class="tab-btn" href="markdown.html">markdown<span class="count">1</span></a>
+  <nav class="sidebar" id="tabs">
+    <div class="eyebrow">// guides</div>
+    <a class="tab-btn" href="/guides/">all guides</a>
+    <a class="tab-btn" href="/guides/css/">css<span class="count">3</span></a>
+    <a class="tab-btn" href="/guides/javascript/">javascript<span class="count">3</span></a>
+    <a class="tab-btn" href="/guides/python/">python<span class="count">3</span></a>
+    <a class="tab-btn" href="/guides/cli/">cli / git<span class="count">4</span></a>
+    <a class="tab-btn" href="/guides/api/">api ref<span class="count">2</span></a>
+    <a class="tab-btn" href="/guides/markdown/">markdown<span class="count">1</span></a>
+    <a class="tab-btn active" href="/guides/docker/">docker<span class="count">1</span></a>
   </nav>
 
   <main>
-    <h1 class="section-head" id="sectionHead">Docker CLI</h1>
-    <p class="section-sub" id="sectionSub">Essential Docker commands and quick examples to get containers running locally.</p>
+    <div class="eyebrow-crumb"><a href="/">home</a> / <a href="/guides/">guides</a> / docker</div>
+    <h1 class="section-head">Docker CLI</h1>
+    <p class="section-sub">Essential Docker commands and quick examples to get containers running locally.</p>
+
+    <div class="grepbar" style="max-width:420px; margin:0 0 20px;">
+      <span class="prompt">grep -i</span>
+      <input type="text" id="search" placeholder="filter this guide…" autocomplete="off">
+      <span class="cursor"></span>
+    </div>
+    <span id="resultCount" style="display:none"></span>
 
     <div id="cardStream">
 
@@ -108,7 +109,6 @@ docker image prune -f</pre>
 
   <aside class="ad-rail">
     <span class="ad-label">Advertisement</span>
-    <!-- tech-ad -->
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3830116872007511"
@@ -121,11 +121,10 @@ docker image prune -f</pre>
   </aside>
 </div>
 
-<footer>
-  <span>devref.sh — static, ad-free, zero telemetry</span>
-  <span id="footerCount">7 categories · 17 references</span>
-</footer>
+<div id="site-footer"></div>
 
-<script src="script.js"></script>
+<script src="/assets/js/site-search.js"></script>
+<script src="/assets/js/chrome.js"></script>
+<script src="/assets/js/guide-filter.js"></script>
 </body>
 </html>

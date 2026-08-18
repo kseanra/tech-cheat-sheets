@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3830116872007511"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64 Encoder (Free, Online, UTF-8 Safe) | DevFixTools</title>
+<meta name="description" content="Encode text to Base64 online. UTF-8 safe, runs entirely in your browser — nothing is uploaded. Includes a one-click decode/swap.">
+<link rel="canonical" href="https://devfixtools.com/tools/base64-encoder/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B0E14'/%3E%3Ctext x='50' y='66' font-size='46' font-family='monospace' font-weight='700' fill='%23F2A65A' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="shell no-sidebar">
+  <main class="wide">
+    <div class="eyebrow-crumb"><a href="/">home</a> / <a href="/tools/">tools</a> / base64 encoder</div>
+    <div class="tool-head">
+      <h1 class="section-head">Base64 Encoder</h1>
+      <p class="section-sub">Encode plain text to Base64. Handles UTF-8 (emoji, accents, non-Latin scripts) correctly, unlike a bare <code>btoa()</code> call.</p>
+    </div>
+
+    <div class="tool-panel">
+      <div class="panel-label">Text</div>
+      <textarea id="b64Input" placeholder="Paste text to encode…" spellcheck="false"></textarea>
+    </div>
+
+    <div class="tool-actions">
+      <button class="btn primary" id="btnEncode">Encode</button>
+      <button class="btn" id="btnDecode">Decode</button>
+      <button class="btn" id="btnSwap">Swap ⇅</button>
+      <button class="btn" id="btnCopy">Copy output</button>
+      <button class="btn" id="btnClear">Clear</button>
+    </div>
+
+    <div class="tool-error" id="b64Error"></div>
+
+    <div class="tool-panel">
+      <div class="panel-label">Base64</div>
+      <pre class="tool-output" id="b64Output"></pre>
+    </div>
+
+    <div class="prose">
+      <h2>About Base64 encoding</h2>
+      <p>Base64 turns arbitrary bytes into a string using only 64 printable ASCII characters (<code>A–Z</code>, <code>a–z</code>, <code>0–9</code>, <code>+</code>, <code>/</code>, with <code>=</code> as padding). It's commonly used to embed binary-ish data — images, tokens, credentials — inside text formats like JSON, URLs, or HTTP headers that can't safely carry raw bytes.</p>
+      <p>Need to go the other way? Use the <a href="/tools/base64-decoder/">Base64 Decoder</a>, or hit <b>Swap</b> above to flip the input/output in place.</p>
+    </div>
+  </main>
+
+  <aside class="ad-rail">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3830116872007511"
+         data-ad-slot="1171484549"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+</div>
+
+<div id="site-footer"></div>
+
+<script>window.TOOL_DEFAULT_MODE = 'encode';</script>
+<script src="/assets/js/site-search.js"></script>
+<script src="/assets/js/chrome.js"></script>
+<script src="/assets/js/tools/base64.js"></script>
+</body>
+</html>

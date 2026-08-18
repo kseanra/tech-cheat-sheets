@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3830116872007511"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Decoder — Decode Percent-Encoded Strings | DevFixTools</title>
+<meta name="description" content="Decode a percent-encoded URL or query string back to plain text. Runs entirely in your browser — nothing is uploaded.">
+<link rel="canonical" href="https://devfixtools.com/tools/url-decoder/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B0E14'/%3E%3Ctext x='50' y='66' font-size='46' font-family='monospace' font-weight='700' fill='%23F2A65A' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="shell no-sidebar">
+  <main class="wide">
+    <div class="eyebrow-crumb"><a href="/">home</a> / <a href="/tools/">tools</a> / url decoder</div>
+    <div class="tool-head">
+      <h1 class="section-head">URL Decoder</h1>
+      <p class="section-sub">Decode a percent-encoded string (like <code>%20</code> or <code>%2F</code>) back to plain text.</p>
+    </div>
+
+    <div class="tool-panel">
+      <div class="panel-label">Input</div>
+      <textarea id="urlInput" placeholder="Paste an encoded URL or string…" spellcheck="false"></textarea>
+    </div>
+
+    <div class="tool-actions">
+      <button class="btn primary" id="btnDecode">Decode</button>
+      <button class="btn" id="btnEncode">Encode component</button>
+      <button class="btn" id="btnSwap">Swap ⇅</button>
+      <button class="btn" id="btnCopy">Copy output</button>
+      <button class="btn" id="btnClear">Clear</button>
+    </div>
+
+    <div class="tool-error" id="urlError"></div>
+
+    <div class="tool-panel">
+      <div class="panel-label">Output</div>
+      <pre class="tool-output" id="urlOutput"></pre>
+    </div>
+
+    <div class="prose">
+      <h2>Why decoding sometimes fails</h2>
+      <p>Decoding throws an error when a <code>%</code> isn't followed by exactly two valid hex digits — often the sign that the string was already decoded once, or was truncated when copied.</p>
+      <p>Need to go the other way? Use the <a href="/tools/url-encoder/">URL Encoder</a>, or hit <b>Swap</b> above.</p>
+    </div>
+  </main>
+
+  <aside class="ad-rail">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3830116872007511"
+         data-ad-slot="1171484549"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+</div>
+
+<div id="site-footer"></div>
+
+<script>window.TOOL_DEFAULT_MODE = 'decode';</script>
+<script src="/assets/js/site-search.js"></script>
+<script src="/assets/js/chrome.js"></script>
+<script src="/assets/js/tools/url-codec.js"></script>
+</body>
+</html>
