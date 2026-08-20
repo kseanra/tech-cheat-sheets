@@ -4,6 +4,13 @@
   gaLoader.src = '/assets/js/analytics.js';
   document.head.appendChild(gaLoader);
 
+  // AdSense — only pushes into ad slots that actually have a rendered width,
+  // avoiding "No slot size for availableWidth=0" when .ad-rail is display:none
+  // (below the 1100px breakpoint where the sidebar rail is hidden).
+  var adsLoader = document.createElement('script');
+  adsLoader.src = '/assets/js/ads.js';
+  document.head.appendChild(adsLoader);
+
   var SECTIONS = [
     {label:'tools',  href:'/tools/'},
     {label:'guides', href:'/guides/'},
