@@ -1,4 +1,9 @@
 (function(){
+  // Google Analytics — one loader here means no page has to include it directly.
+  var gaLoader = document.createElement('script');
+  gaLoader.src = '/assets/js/analytics.js';
+  document.head.appendChild(gaLoader);
+
   var SECTIONS = [
     {label:'tools',  href:'/tools/'},
     {label:'guides', href:'/guides/'},
